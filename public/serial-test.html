@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>串口释放自测</title>
+<style>
+  body{font-family:system-ui,"Microsoft YaHei",sans-serif;margin:24px;max-width:820px;line-height:1.6}
+  h2{margin-bottom:4px}
+  p.note{color:#666;font-size:13px}
+  button{padding:10px 18px;margin:8px 8px 8px 0;font-size:15px;cursor:pointer;border:1px solid #888;border-radius:6px;background:#f4f4f4}
+  button#run{background:#1a73e8;color:#fff;border-color:#1a73e8}
+  pre{background:#0c0f14;color:#b6f;padding:14px;height:340px;overflow:auto;white-space:pre-wrap;word-break:break-all;border-radius:8px;font-size:13px}
+  .ok{color:#3fdc7a}.bad{color:#ff5a5a}.info{color:#7fb2ff}
+</style>
+</head>
+<body>
+<h2>Web Serial 端口释放自测</h2>
+<p class="note">用途：验证「监视 → 烧写」切换时端口是否被真正关闭。全程不需要开发者工具。请用 Chrome / Edge 且通过 https 打开本页。会弹两次选串口窗口，都选同一个 COM 口即可。</p>
+<button id="run">运行完整自测</button>
+<button id="clear">清空日志</button>
+<pre id="log">点击「运行完整自测」开始。</pre>
+
+<script>
+const logEl = document.getElementById('log');
+const log = (m, cls) => { const d = document.createElement('div'); if(cls) d.className=cls; d.textContent = m; logEl.appendChild(d); logEl.scrollTop = logEl.scrollHeight; };
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+let port=null, reader=null, writer=null, readDone=null;
+
+// 复刻 core.js 的 _disconnectPort（关键：无条件 close，不依赖 port.opened）
+async function disconnect(){
+  if(!port) return;
+  if(reader){ try{ await reader.cancel(); }catch(_){} }
+  if(readDone){ try{ await Promise.race([readDone, new Promise(r=>setTimeout(r,3000))]); }catch(_){} }
+  reader=null;
+  if(writer){ try{ await writer.close(); }catch(_){} try{ writer.releaseLock(); }catch(_){} writer=null; }
+  readDone=null;
+  // 无条件 close：部分浏览器 SerialPort.opened 为 undefined，绝不能写成「if(opened) close()」
+  try{ await port.close(); }catch(_){ /* 本就未开 → 忽略 */ }
+}
+
+// 复刻 core.js 的 connectSerial（先断开再 open，不依赖 port.opened）
+async function connect(){
+  if(!navigator.serial){ alert('此浏览器不支持 Web Serial，请用 Chrome/Edge 且走 https'); return false; }
+  if(!port) port = await navigator.serial.requestPort();
+  await disconnect();   // 先确保从关闭态开始（重跑也安全）
+  await port.open({baudRate:115200});
+  writer = port.writable.getWriter();
+  reader = port.readable.getReader();
+  const loop = async ()=>{
+    try{ while(true){ const {value,done}=await reader.read(); if(done) break; } }
+    catch(_){ /* cancel / 断开 */ }
+    finally{ try{ reader.releaseLock(); }catch(_){} }
+  };
+  readDone = loop();
+  return true;
+}
+
+async function run(){
+  logEl.innerHTML='';
+  log('==== 开始自测 ====','info');
+  try{
+    log('① 模拟「连接监视」：requestPort → open(115200) → 启动读取循环');
+    await connect();
+    log('   连接成功（open 未抛错）','ok');
+    await sleep(600);
+    log('② 模拟「点开始烧写」：断开监视（cancel 读循环 + 释放读/写锁 + 无条件 close）');
+    await disconnect();
+    log('   断开调用完成','ok');
+    await sleep(300);
+    log('③ 模拟 esptool 取「全新」端口并 open(921600) —— 这一步决定旧端口是否真被释放');
+    const p2 = await navigator.serial.requestPort();
+    try{
+      await p2.open({baudRate:921600});
+      log('   ✅ 新端口 open 成功 —— 证明第②步确实关闭了旧端口，修复生效！','ok');
+      await p2.close().catch(()=>{});
+      log('==== 自测通过 ✅（现在去固件页点「开始烧写」应该就好了） ====','ok');
+    }catch(e){
+      log('   ❌ 新端口 open 失败: '+e.message,'bad');
+      log('   → 旧端口在 disconnect 后仍未被 OS / Chrome 释放，已不是网页代码问题，而是：','bad');
+      log('     ① Chrome 串口服务进程残留：完全退出浏览器（所有窗口）再开；','bad');
+      log('     ② CH340 / USB 驱动在 Windows 下不释放端口：拔插 USB / 换口换线 / 重启电脑；','bad');
+      log('     ③ 本机有别程序（串口调试助手、putty、旧的 esptool）占着 COM5。','bad');
+      log('   → 绕过方案：直接用本机 ESP-IDF 的 esptool.py 烧（见固件页「手动教程」）。','bad');
+      log('==== 自测失败 ❌ ====','bad');
+    }
+  }catch(e){
+    log('==== 自测异常 ❌ ====','bad');
+    log('   '+e.message,'bad');
+  } finally {
+    try{ if(port) await port.close(); }catch(_){}
+    port=null; writer=null; reader=null;
+  }
+}
+
+document.getElementById('run').onclick = ()=>run();
+document.getElementById('clear').onclick = ()=>logEl.innerHTML='';
+</script>
+</body>
+</html>

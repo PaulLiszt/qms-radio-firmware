@@ -1,0 +1,14 @@
+# Caddy 自动为 ba4qms.top 申请并续期 Let's Encrypt 证书（需 80/443 放行且 DNS 已指向本机）。
+# WebSocket 由 reverse_proxy 原生透传，无需额外指令。
+
+{
+  email admin@ba4qms.top
+}
+
+ba4qms.top {
+  reverse_proxy app:8080
+}
+
+www.ba4qms.top {
+  reverse_proxy app:8080
+}

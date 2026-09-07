@@ -1,0 +1,33 @@
+# 依赖
+node_modules
+
+# 私钥与用户数据切勿提交
+secrets/*.pem
+
+# 运行时用户数据（仅提交示例与 FAQ 源；真实用户库不入库）
+data/users.json
+data/dmr_users_cache.json
+
+# 固件二进制：通过 GitHub Releases 分发，不进仓库
+# （本地 server/ 目录仍保留这些文件，供 WinSCP 部署时上传；仅 git 不跟踪）
+public/firmware/*.bin
+tools/public/firmware/*.bin
+
+# 临时测试产物（非源码）
+_ecdsa_test.js
+_pub.pem
+_sig.bin
+_tok.bin
+
+# 环境变量（含密码等机密，切勿提交；参考 .env.example）
+.env
+.env.local
+.env.*.local
+
+# 日志
+*.log
+npm-debug.log
+
+# 系统
+.DS_Store
+Thumbs.db

@@ -1,0 +1,19 @@
+{
+  "name": "mmdvm-s3-terminal-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MMDVM-S3 Terminal web server: ECDSA P-256 token issuance + Web Serial firmware flasher/config UI (free, no membership).",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "genkey": "node tools/genkey.js",
+    "adduser": "node tools/adduser.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  }
+}

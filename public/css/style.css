@@ -1,0 +1,259 @@
+:root {
+  --bg: #0f1420;
+  --card: #1a2233;
+  --fg: #e6ebf5;
+  --muted: #93a0b8;
+  --accent: #3b82f6;
+  --ok: #22c55e;
+  --warn: #f59e0b;
+  --line: #2a3450;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--fg);
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- 顶部栏 ---------- */
+.topbar {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  padding: 12px 20px; background: var(--card); border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+}
+.brand { font-size: 18px; font-weight: 700; }
+.brand b { color: var(--accent); }
+.nav { display: flex; gap: 6px; flex: 1; }
+.nav a {
+  color: var(--muted); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 14px;
+}
+.nav a:hover { background: #232d44; text-decoration: none; }
+.nav a.active { background: var(--accent); color: #fff; }
+.status { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chip { font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.chip.ok { color: var(--ok); border-color: rgba(34,197,94,.4); }
+.chip.warn { color: var(--warn); border-color: rgba(245,158,11,.4); }
+.chip.err { color: #f87171; border-color: rgba(248,113,113,.5); }
+
+/* ---------- 端口错误横幅 ---------- */
+.banner {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0; padding: 12px 20px;
+  background: #3a1620; border-bottom: 1px solid #7f1d1d;
+  color: #fecaca; font-size: 14px; line-height: 1.6;
+}
+.banner[hidden] { display: none; }
+.banner #devBannerMsg { flex: 1; }
+.bannerClose {
+  flex: none; background: transparent; border: 0; color: #fecaca;
+  font-size: 20px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+}
+.bannerClose:hover { background: rgba(255,255,255,.1); }
+/* 醒目提示框（如「只能使用 COM 口」） */
+.warn-box {
+  margin: 0 0 16px; padding: 12px 16px;
+  background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.5);
+  border-left: 4px solid var(--warn); border-radius: 10px;
+  color: #fcd34d; font-size: 13.5px; line-height: 1.7;
+}
+.warn-box strong { color: #fde68a; }
+
+/* ---------- 站内信（账户页 / 管理页通用） ---------- */
+.msg-compose input, .msg-compose textarea { width: 100%; margin: 6px 0; }
+.msg-compose textarea { resize: vertical; }
+.msgs { display: flex; flex-direction: column; gap: 10px; }
+.msg { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: #0f1420; }
+.msg-h { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.msg-h .msg-ts { opacity: .7; }
+.msg-b { font-size: 14px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+.msg.mine { border-left: 3px solid var(--accent); }
+.msg.theirs { border-left: 3px solid var(--ok, #22c55e); }
+.msg-actions { margin-top: 6px; display: flex; gap: 8px; }
+.reply-box { margin-top: 8px; }
+
+/* ---------- FAQ（首页折叠 + 管理页列表） ---------- */
+.faq { display: flex; flex-direction: column; gap: 8px; }
+.faq-item { border: 1px solid var(--line); border-radius: 10px; padding: 0; background: #0f1420; overflow: hidden; }
+.faq-item summary { cursor: pointer; padding: 12px 14px; font-weight: 600; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: '▸ '; color: var(--accent); }
+.faq-item[open] summary::before { content: '▾ '; }
+.faq-a { padding: 0 14px 14px; line-height: 1.7; color: #cdd6e8; white-space: pre-wrap; word-break: break-word; }
+
+.faq-admin { display: flex; flex-direction: column; gap: 10px; }
+.faq-row { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #0f1420; }
+.faq-q { font-weight: 600; margin-bottom: 4px; }
+.faq-a { font-size: 13px; color: var(--muted); margin-bottom: 8px; white-space: pre-wrap; word-break: break-word; }
+.faq-edit-box { margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
+.faq-edit-box input, .faq-edit-box textarea { width: 100%; }
+.mini { background: var(--accent); color: #fff; border: 0; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+.mini.danger { background: var(--danger, #dc2626); }
+.userTools { display: flex; align-items: center; gap: 10px; margin: 8px 0 12px; flex-wrap: wrap; }
+.userTools .cb { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.userTools .sep { width: 1px; height: 22px; background: var(--line); margin: 0 2px; }
+.userTools .mini { margin: 0; }
+.userTools .mini:disabled { opacity: .4; cursor: not-allowed; }
+.tbl td .mini { margin: 1px 2px; }
+.tbl { width: 100%; border-collapse: collapse; margin-top: 4px; }
+.tbl th, .tbl td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: middle; }
+.tbl th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.tbl tbody tr:hover { background: #141b2b; }
+.tbl .sel { width: 16px; height: 16px; }
+
+/* ---------- 布局 ---------- */
+.view { max-width: 900px; margin: 0 auto; padding: 24px 20px 64px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 20px; margin-bottom: 20px;
+}
+.card h2 { margin-top: 0; font-size: 18px; }
+.card h3 { font-size: 14px; color: var(--muted); margin: 16px 0 6px; }
+.sub { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+.info { color: var(--muted); font-size: 13px; }
+.err { color: #f87171; min-height: 18px; }
+.hint { color: var(--muted); font-size: 12px; line-height: 1.6; margin-top: 8px; }
+
+/* ---------- 表单 ---------- */
+label { display: block; margin: 10px 0; color: var(--muted); font-size: 13px; }
+input {
+  display: block; width: 100%; margin-top: 6px; padding: 9px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: #0f1420; color: var(--fg); font-size: 14px;
+}
+button {
+  background: var(--accent); color: #fff; border: 0;
+  padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px;
+}
+button.ghost { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+button.primary { background: var(--accent); color: #fff; }
+
+/* ---------- 首页 ---------- */
+.hero { padding: 8px 0 16px; }
+.hero h1 { margin: 0 0 8px; font-size: 28px; }
+.lede { color: var(--muted); line-height: 1.7; margin: 0; }
+.feat, .steps { line-height: 1.9; color: #cdd6e8; }
+.feat li, .steps li { margin: 4px 0; }
+.flinks { display: flex; flex-wrap: wrap; gap: 10px; }
+.flink { display: inline-block; padding: 8px 14px; background: #141b2b; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--fg); font-size: 14px; text-decoration: none; }
+.flink:hover { border-color: var(--accent); color: #fff; }
+.modgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.mod { display: flex; flex-direction: column; gap: 4px; padding: 16px; background: #141b2b;
+  border: 1px solid var(--line); border-radius: 10px; color: var(--fg); }
+.mod:hover { border-color: var(--accent); text-decoration: none; }
+.mod span { color: var(--muted); font-size: 12px; }
+
+/* ---------- 下载 / 代码 ---------- */
+.dl { line-height: 2; }
+pre.code, pre.log {
+  background: #0f1420; border: 1px solid var(--line); border-radius: 8px;
+  padding: 12px; overflow: auto; white-space: pre-wrap; font-size: 12px;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+pre.log { color: #b9c4dc; }
+
+/* ---------- 状态网格 ---------- */
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 4px 16px; }
+.grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+.kv { margin: 8px 0; }
+.kv .k { color: var(--muted); display: block; font-size: 12px; margin-bottom: 4px; }
+.kv b { font-size: 15px; }
+
+/* ---------- RX/TX 徽标 ---------- */
+.badge {
+  display: inline-block; padding: 6px 14px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; letter-spacing: .3px;
+  border: 1px solid transparent; transition: background .15s, color .15s;
+}
+.badge.idle   { background: #1e2738; color: var(--muted); border-color: var(--line); }
+.badge.active { background: var(--ok); color: #06210f; box-shadow: 0 0 0 3px rgba(34,197,94,.18); }
+.badge.warn   { background: var(--warn); color: #2a1700; border-color: rgba(245,158,11,.4); }
+#sbTx.active, #mTx.active { background: var(--warn); color: #2a1700; box-shadow: 0 0 0 3px rgba(245,158,11,.18); }
+
+/* ---------- 登录 ---------- */
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login { width: 340px; }
+.login h1 { margin: 0 0 4px; font-size: 24px; }
+
+/* ---------- 呼号国旗 / 远端电台 ---------- */
+.flag { width: 22px; height: 16px; vertical-align: -2px; border-radius: 2px; border: 1px solid rgba(255,255,255,.15); object-fit: cover; display: inline-block; }
+.callsign-flag { display: inline-block; margin-left: 10px; color: var(--muted); font-size: 13px; vertical-align: middle; }
+.callsign-flag .cs-flag { width: 20px; height: 15px; }
+.muted { color: var(--muted); font-size: 13px; }
+.remote { margin-top: 16px; padding: 14px 16px; background: #141b2b; border: 1px solid var(--line); border-radius: 10px; }
+.remote-head { font-size: 12px; color: var(--muted); margin-bottom: 8px; letter-spacing: .5px; display: flex; justify-content: space-between; align-items: center; }
+.remote-body { font-size: 15px; line-height: 1.6; display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
+.remote-body .cs { font-size: 20px; font-weight: 700; color: var(--fg); }
+.remote-body .cty { font-size: 15px; }
+.remote-body .nm { font-size: 13px; color: var(--muted); }
+.remote-body .id { font-size: 12px; color: var(--muted); margin-left: auto; }
+
+/* ---------- 呼号库状态 ---------- */
+.dbstat { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.dbstat.ok { color: var(--ok); border-color: rgba(34,197,94,.4); }
+.dbstat.warn { color: var(--warn); border-color: rgba(245,158,11,.4); }
+
+/* ---------- 通联记录 ---------- */
+.qso-list { list-style: none; margin: 12px 0 0; padding: 0; max-height: 280px; overflow: auto; }
+.qso-list li.qso { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 8px; background: #141b2b; margin-bottom: 6px; font-size: 14px; }
+.qso-list .qdir { font-weight: 700; font-size: 12px; padding: 1px 7px; border-radius: 6px; }
+.qso.rx .qdir { background: rgba(34,197,94,.15); color: var(--ok); }
+.qso.tx .qdir { background: rgba(245,158,11,.15); color: var(--warn); }
+.qso-list .qso-flag { width: 20px; height: 15px; }
+.qso-list .muted { margin-left: auto; }
+
+/* ---------- 内联登录卡片（门禁） ---------- */
+.login-gate { max-width: 420px; margin: 24px auto; }
+.login-gate h2 { margin-top: 0; }
+
+/* ---------- 顶栏右上角用户区 ---------- */
+.topright { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+#userBox { display: inline-flex; align-items: center; gap: 6px; }
+#userBox .uname { font-size: 13px; color: var(--fg); }
+
+/* ---------- 模态登录/注册 ---------- */
+.modal-mask { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+.modal { position: relative; width: 360px; max-width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+.modal h3 { margin: 0 0 16px; font-size: 20px; }
+.modal label { margin: 12px 0; }
+.modal .primary { width: 100%; margin-top: 8px; }
+.modal-x { position: absolute; top: 8px; right: 12px; background: transparent; border: 0; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; padding: 4px; }
+.modal-switch { font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+.modal-switch a { cursor: pointer; }
+
+/* ---------- 未登录占位 ---------- */
+.placeholder { max-width: 480px; margin: 40px auto; text-align: center; }
+.placeholder .row { justify-content: center; }
+
+/* ---------- 远端电台大卡 ---------- */
+.remote-card { margin-top: 12px; padding: 18px 20px; background: #141b2b; border: 1px solid var(--line); border-radius: 12px; min-height: 90px; }
+.rc-empty { color: var(--muted); font-size: 14px; padding: 18px 0; text-align: center; }
+.rc-body { display: flex; flex-direction: column; gap: 10px; }
+.rc-call { display: flex; align-items: center; gap: 12px; font-size: 32px; font-weight: 800; color: var(--fg); line-height: 1.1; }
+.rc-call .flag { width: 44px; height: 33px; border-radius: 3px; }
+.rc-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); }
+.rc-meta span { display: inline-flex; gap: 6px; align-items: baseline; }
+.rc-meta i { font-style: normal; color: #6b7794; }
+
+/* ---------- 通联记录表格 ---------- */
+.table-wrap { overflow-x: auto; margin-top: 8px; }
+.qso-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.qso-table th, .qso-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.qso-table th { color: var(--muted); font-weight: 600; font-size: 12px; }
+.qso-table tr.rx td:first-child { border-left: 3px solid var(--ok); }
+.qso-table tr.tx td:first-child { border-left: 3px solid var(--warn); }
+.qso-table .muted { text-align: center; }
+
+/* ---------- 配置分组 ---------- */
+.cfg-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+.cfg-group { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px 18px; margin: 0; background: #141b2b; }
+.cfg-group legend { font-size: 14px; font-weight: 700; color: var(--fg); padding: 0 6px; }
+.cfg-group .group-desc { color: var(--muted); font-size: 12px; margin: 4px 0 10px; }
+.cfg-field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cfg-field label { flex: 1 1 200px; margin: 8px 0; }
+.cfg-field .field-help { flex: 1 1 100%; color: var(--muted); font-size: 11px; margin: -4px 0 4px; }
+.cfg-field .mini { align-self: flex-end; margin-bottom: 8px; }
+.toolbar { margin: 4px 0 0; }
+

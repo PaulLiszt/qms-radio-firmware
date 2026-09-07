@@ -1,0 +1,43 @@
+services:
+  app:
+    build: .
+    # 调高文件描述符上限，避免大量长连接(WebSocket)触顶默认 ~1024 限制
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    expose:
+      - "8080"
+    environment:
+      - PORT=8080
+      # 管理员种子密码：从宿主机 .env 注入（compose 自动读取项目目录下的 .env）。
+      # 未设置时容器内回退到占位值，仅影响「全新部署首次播种」，不影响已有 ADMIN。
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - LICENSE_PRIVATE_KEY_FILE=/run/secrets/private_key.pem
+      - REQUIRE_SECURE=1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./data:/app/data
+      - ./secrets:/run/secrets:ro
+
+  caddy:
+    image: caddy:2
+    # 反向代理层持有最多客户端连接，同样调高
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:
