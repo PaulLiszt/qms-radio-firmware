@@ -1,6 +1,8 @@
 # MMDVM-S3 Terminal
 
-> A software-only MMDVM all-in-one terminal that runs on a single ESP32-S3 — **no external AMBE vocoder dongle required**.
+> A software-only MMDVM all-in-one terminal that runs on a single ESP32-S3 — **flash the firmware and configure it straight from the browser over Web Serial (zero install, no drivers)**.
+
+**Browser-based ESP32-S3 MMDVM / DMR terminal** — software AMBE vocoder (no external dongle), USB-headset audio, and a **zero-install Web Serial flasher + config UI**. No Raspberry Pi required.
 
 ---
 
@@ -10,9 +12,9 @@
 MMDVM-S3 Terminal turns a plain ESP32-S3 development board into a compact DMR hotspot / terminal. The AMBE vocoder runs **entirely in software** on the ESP32-S3, so you don't need to buy or wire up an external AMBE USB dongle. Audio is delivered to a standard **USB headset (UAC 1.0)** — the board acts as a USB host.
 
 ### Highlights
-- **No external AMBE hardware** — the codec is software on the ESP32-S3.
-- **USB headset audio** — plug in a UAC 1.0 Type-C headset; the board drives it directly.
-- **Zero-install web tools** — firmware flashing and radio configuration happen in the browser over **Web Serial**. No drivers, no Python toolchain.
+- **Zero-install browser flashing & config** — flash the firmware and set your callsign / DMR ID entirely in the browser over **Web Serial**. No esptool, no Python toolchain, no drivers.
+- **No external AMBE hardware** — the AMBE vocoder runs in software on the ESP32-S3.
+- **USB headset audio** — plug in a UAC 1.0 Type-C headset; the board drives it directly as a USB host.
 - **Free, no membership tiers** — device tokens are issued free of charge to any signed-in account.
 - **Open web source** — this repository contains the web server + flasher UI (MIT licensed). The firmware binary is distributed via GitHub Releases.
 
@@ -54,9 +56,9 @@ MIT — see [LICENSE](LICENSE).
 MMDVM-S3 Terminal 把一块普通的 ESP32-S3 开发板变成一个紧凑的 DMR 热点 / 终端。AMBE 声码器**完全在 ESP32-S3 上以软件实现**，因此你无需购买或连接外置的 AMBE USB 加密狗。声音通过标准 **USB 耳机（UAC 1.0）** 输出——开发板本身作为 USB 主机。
 
 ### 主要特点
-- **无需外置 AMBE 硬件** —— 声码器是 ESP32-S3 上的软件实现。
-- **USB 耳机音频** —— 插入 UAC 1.0 的 Type-C 耳机，开发板直接驱动。
-- **零安装网页工具** —— 固件烧录与参数配置都在浏览器里通过 **Web Serial** 完成，无需驱动、无需 Python 环境。
+- **零安装浏览器烧写与配置** —— 固件烧录、呼号 / DMR ID 设置全部在浏览器里通过 **Web Serial** 完成，无需 esptool、无需 Python 环境、无需驱动。
+- **无需外置 AMBE 硬件** —— AMBE 声码器是 ESP32-S3 上的软件实现。
+- **USB 耳机音频** —— 插入 UAC 1.0 的 Type-C 耳机，开发板作为 USB 主机直接驱动。
 - **免费、无会员门槛** —— 设备令牌向任何登录账户免费签发。
 - **网页端开源** —— 本仓库包含网页服务端 + 烧写界面（MIT 许可）。固件二进制通过 GitHub Releases 分发。
 
