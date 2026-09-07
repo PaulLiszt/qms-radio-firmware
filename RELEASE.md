@@ -7,7 +7,7 @@ First public release of MMDVM-S3 Terminal.
   https://ba4qms.top (connect the board's **CH340 COM port**).
 
 ## What is included
-- Software-only MMDVM all-in-one running on a single ESP32-S3 (no external AMBE dongle).
+- Software-only MMDVM all-in-one running on a single ESP32-S3 (no external vocoder dongle).
 - USB headset audio (UAC 1.0); the board acts as a USB host.
 - Zero-install browser flashing & configuration (Web Serial).
 - Free device tokens (ECDSA P-256), no membership tiers.

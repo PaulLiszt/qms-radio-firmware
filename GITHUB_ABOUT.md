@@ -5,14 +5,14 @@
 
 ## 1) Description（仓库描述，≤ 350 字符）
 ```
-ESP32-S3 all-in-one MMDVM/DMR terminal with a zero-install browser Web Serial flasher & config UI. Software AMBE, no Raspberry Pi, no external vocoder — flash from the browser, no drivers.
+ESP32-S3 all-in-one MMDVM/DMR terminal with a zero-install browser Web Serial flasher & config UI. Software voice codec, no Raspberry Pi, no external vocoder — flash from the browser, no drivers.
 ```
 
 ## 2) About 长文（可选，填在 Description 下方的大文本框）
 ```
 MMDVM-S3 Terminal turns a single ESP32-S3 board into a DMR hotspot / terminal.
 - Flash the firmware & set callsign/DMR ID in the browser over Web Serial (zero install).
-- AMBE vocoder runs in software — no external dongle, no Raspberry Pi.
+- Voice codec runs in software — no external dongle, no Raspberry Pi.
 - USB-headset audio (UAC 1.0), free device tokens (ECDSA P-256).
 Web source (MIT) here; firmware binary via Releases.
 ```
@@ -28,7 +28,6 @@ ham-radio
 amateur-radio
 web-serial
 firmware-flasher
-ambe
 esp-idf
 raspberry-pi-alternative
 ```
