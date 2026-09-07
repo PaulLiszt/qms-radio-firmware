@@ -133,6 +133,9 @@ button.primary { background: var(--accent); color: #fff; }
 .hero { padding: 8px 0 16px; }
 .hero h1 { margin: 0 0 8px; font-size: 28px; }
 .lede { color: var(--muted); line-height: 1.7; margin: 0; }
+.hero-actions { margin: 0; }
+.btn-github { display: inline-block; margin-top: 14px; padding: 10px 18px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-weight: 600; text-decoration: none; }
+.btn-github:hover { opacity: .9; }
 .feat, .steps { line-height: 1.9; color: #cdd6e8; }
 .feat li, .steps li { margin: 4px 0; }
 .flinks { display: flex; flex-wrap: wrap; gap: 10px; }

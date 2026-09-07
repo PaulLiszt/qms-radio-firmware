@@ -35,6 +35,7 @@ export async function renderHome(view) {
     <section class="hero">
       <h1>${t('home.title')}</h1>
       <p class="lede">${t('home.lede')}</p>
+      <p class="hero-actions"><a class="btn-github" href="https://github.com/PaulLiszt/qms-radio-firmware" target="_blank" rel="noopener noreferrer">${t('home.repoLink')} ↗</a></p>
     </section>
 
     <section class="card">

@@ -54,6 +54,7 @@ export function renderFirmware(view) {
     <section class="card">
       <h2>${t('fw.manTitle')}</h2>
       <p class="sub">${t('fw.manGithub')}</p>
+      <p><a class="flink" href="https://github.com/PaulLiszt/qms-radio-firmware/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer">${t('fw.downloadLink')}</a></p>
       <h3>${t('fw.m1')}</h3>
       <pre class="code">esptool.py --chip esp32s3 -p COMx -b 921600 write_flash \\
   0x0 combined.bin</pre>

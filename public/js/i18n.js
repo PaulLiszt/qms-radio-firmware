@@ -88,6 +88,7 @@ const DICT = {
     'home.s6': '到「监视 / 通话」页查看实时 RX/TX 与当前通话。',
     'home.linksTitle': '友情链接',
     'home.linksHint': '与本项目相关的数字对讲 / DMR 资源站点。',
+    'home.repoLink': '在 GitHub 上查看源码与固件',
 
     'fw.dlTitle': '下载固件',
     'fw.dlSub': '已合并 bootloader / 分区表 / ota_data / 主程序为一个镜像，烧写到 0x0 即可，便于分享与传播。',
@@ -120,6 +121,7 @@ const DICT = {
     'fw.portBusy': '无法打开串口：端口仍被占用。请关闭其他串口程序（串口调试助手 / Arduino IDE / 其他浏览器标签页），并关闭本标签页后重新打开再试。',
     'fw.reconnect': '烧写完成，正在恢复监视连接…',
     'fw.manGithub': '如需手动烧写，请从 GitHub Releases 下载固件包（combined.bin 等），再按下方命令烧录。',
+    'fw.downloadLink': '下载固件 v1.0.0（GitHub Releases）',
 
     'cfg.title': '写入参数',
     'cfg.sub': '经串口向开发板下发 CPS 配置。先「读取当前配置」回填表单，修改后「应用配置」写入分区并重启。',
@@ -411,6 +413,7 @@ const DICT = {
     'home.s6': 'Open Monitor / QSO for live RX/TX and the current call.',
     'home.linksTitle': 'Friendly links',
     'home.linksHint': 'Digital-voice / DMR resources related to this project.',
+    'home.repoLink': 'View source & firmware on GitHub',
 
     'fw.dlTitle': 'Download firmware',
     'fw.dlSub': 'Bootloader, partition table, ota_data and the app are merged into one image — flash it at 0x0. Easy to share.',
@@ -443,6 +446,7 @@ const DICT = {
     'fw.portBusy': 'Cannot open serial port: it is still in use. Close other serial tools (terminal / Arduino IDE / other tabs) and reopen this tab, then retry.',
     'fw.reconnect': 'Flashing done; restoring monitor connection…',
     'fw.manGithub': 'For manual flashing, download the firmware package (combined.bin, etc.) from GitHub Releases, then use the commands below.',
+    'fw.downloadLink': 'Download firmware v1.0.0 (GitHub Releases)',
 
     'cfg.title': 'Device settings',
     'cfg.sub': 'Writes CPS settings to the board over serial. Read the current config first, edit, then apply (writes to flash and reboots).',
