@@ -4,7 +4,7 @@
 > ```
 MMDVM-S3 Terminal turns a single ESP32-S3 board into a DMR hotspot / terminal.
 - Flash the firmware & set callsign/DMR ID in the browser over Web Serial (zero install).
-- AMBE vocoder runs in software — no external dongle, no Raspberry Pi.
+- Vocoder runs in software — no external dongle, no Raspberry Pi.
 - USB-headset audio (UAC 1.0), free device tokens (ECDSA P-256).
 Web source (MIT) here; firmware binary via Releases.
 ```
