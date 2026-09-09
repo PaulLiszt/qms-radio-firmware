@@ -77,7 +77,7 @@ export async function renderHome(view) {
 
   // 异步加载 FAQ（公开接口，无需登录）
   try {
-    const r = await core.api('/api/faq');
+    const r = await (await fetch('/faq.json')).json();
     const box = view.querySelector('#faqList');
     if (!box) return null;
     const faq = (r && r.faq) || [];

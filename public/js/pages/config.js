@@ -224,10 +224,6 @@ export async function renderConfig(view) {
     out(r2 || t('cfg.msg.noAck'));
     stateEl.dataset.busy = '0';
     stateEl.textContent = r2 && r2.startsWith('@@CPS OK') ? t('cfg.st.rebooting') : t('cfg.st.incomplete');
-    // 写入参数成功后上报活跃（已登录时），避免账户因长期无活跃被冻结
-    if (r2 && r2.startsWith('@@CPS OK') && core.user) {
-      core.api('/api/activity/param-write', { method: 'POST' }).catch(() => {});
-    }
   }
 
   view.querySelector('#cfgRead').addEventListener('click', readCfg);

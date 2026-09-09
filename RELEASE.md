@@ -5,13 +5,14 @@ First public release of MMDVM-S3 Terminal.
 ## Firmware binary (attached)
 - `qms-radio-firmware-v1.0.0.bin` — flash it with the in-browser Web Serial flasher at
   https://ba4qms.top (connect the board's **CH340 COM port**).
+- The same binary is also bundled in this repo as `public/firmware/combined.bin`, so the
+  in-repo flasher works out of the box after cloning.
 
 ## What is included
 - Software-only MMDVM all-in-one running on a single ESP32-S3 (no external vocoder dongle).
 - USB headset audio (UAC 1.0); the board acts as a USB host.
 - Zero-install browser flashing & configuration (Web Serial).
-- Free device tokens (ECDSA P-256), no membership tiers.
-- Web server + flasher UI in this repository (MIT licensed).
+- This repository (MIT): the browser flasher UI + settings writer, as a pure static site.
 
 ## Requirements
 - ESP32-S3 development board
@@ -21,4 +22,5 @@ First public release of MMDVM-S3 Terminal.
 
 ## Notes
 - The firmware is distributed as a closed-source binary; the web source in this repo is open (MIT).
-- The token signing key is held by the project and is not included in the repository.
+- The live monitor, account management and network access are provided by the hosted platform
+  at https://ba4qms.top — this repo contains only the flasher & config tool.

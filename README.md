@@ -5,7 +5,7 @@
 MMDVM-S3 Terminal turns a single ESP32-S3 board into a DMR hotspot / terminal.
 - Flash the firmware & set callsign/DMR ID in the browser over Web Serial (zero install).
 - Voice codec runs in software — no external dongle, no Raspberry Pi.
-- USB-headset audio (UAC 1.0), free device tokens (ECDSA P-256).
+- USB-headset audio (UAC 1.0).
 
 This open-source repository is the **browser flasher + config tool** (MIT). The firmware binary (`combined.bin`) is **bundled in this repo**, so after cloning you can flash in one click immediately; a standalone release is also available on GitHub Releases if you prefer.
 
@@ -23,7 +23,7 @@ MMDVM-S3 Terminal turns a plain ESP32-S3 development board into a compact DMR ho
 Both run entirely in the browser and need **no account and no server**.
 
 ### Want the full experience? (monitor, account, network)
-The **live monitor** in this project is genuinely useful — you can watch real-time RX/TX and the current QSO right from the web. The complete platform, including the live **monitor**, account management, free device tokens and network access, is hosted and running at **https://ba4qms.top**. For the best experience, just open that site in Chrome / Edge.
+The **live monitor** in this project is genuinely useful — you can watch real-time RX/TX and the current QSO right from the web. The complete platform, including the live **monitor**, account management and network access, is hosted and running at **https://ba4qms.top**. For the best experience, just open that site in Chrome / Edge.
 
 ### Getting started (hosted — recommended)
 1. Open **https://ba4qms.top** (use Chrome / Edge).
@@ -38,15 +38,16 @@ The **live monitor** in this project is genuinely useful — you can watch real-
 - 2.4 GHz Wi-Fi only.
 
 ### Self-hosting the flasher (optional)
-This repo is the static web front-end + a tiny Node/Express server for the flasher UI and FAQ. The flashable firmware (`public/firmware/combined.bin`) is already included, so one-click flashing works out of the box after cloning.
+This repo is a **pure static site** — just serve the `public/` folder with any static file server. No backend, no database, no build step. The firmware binary is already bundled, so one-click flashing works out of the box.
 ```bash
 git clone <this-repo>
-cd server
-npm install
-docker compose up -d --build
+cd qms-radio-firmware
+# 任选其一启动静态服务（无需 npm install）：
+npm start                       # 内置零依赖静态服务器 -> http://localhost:8080
+# 或： npx --yes serve public
+# 或： python3 -m http.server 8080   （在 public/ 目录下执行）
 ```
 Open the site in Chrome / Edge (Web Serial requires HTTPS or localhost).
-> The ECDSA P-256 signing key is intentionally **not** in this repository. Token issuance for the released binary is handled by the hosted service at ba4qms.top.
 
 ### License
 MIT — see [LICENSE](LICENSE).
@@ -65,7 +66,7 @@ MMDVM-S3 Terminal 把一块普通的 ESP32-S3 开发板变成一个紧凑的 DMR
 两项功能**完全在浏览器内运行，无需账户、无需服务端**。
 
 ### 想要完整体验？（监视 / 账户 / 网络）
-本项目里的**实时监视**非常实用——你可以直接在网页上看到实时 RX/TX 与当前通联。完整平台（含好用的**实时监视**、账户管理、免费设备令牌与网络接入）已在托管站点 **https://ba4qms.top** 上线运行。想获得最佳体验，直接用 Chrome / Edge 打开该站点即可。
+本项目里的**实时监视**非常实用——你可以直接在网页上看到实时 RX/TX 与当前通联。完整平台（含好用的**实时监视**、账户管理与网络接入）已在托管站点 **https://ba4qms.top** 上线运行。想获得最佳体验，直接用 Chrome / Edge 打开该站点即可。
 
 ### 快速开始（托管版，推荐）
 1. 打开 **https://ba4qms.top**（使用 Chrome / Edge）。
@@ -80,15 +81,16 @@ MMDVM-S3 Terminal 把一块普通的 ESP32-S3 开发板变成一个紧凑的 DMR
 - 仅支持 2.4GHz-WiFi。
 
 ### 自建烧写工具（可选）
-本仓库是静态网页前端 + 一个轻量 Node/Express 服务端（仅供烧写界面与 FAQ 使用）。可烧写的固件（`public/firmware/combined.bin`）已随仓库附带，clone 后即可一键烧写，开箱即用。
+本仓库是**纯静态站点**——只需用任意静态服务器托管 `public/` 目录即可，无需后端、无需数据库、无需构建。可烧写的固件（`public/firmware/combined.bin`）已随仓库附带，clone 后即可一键烧写，开箱即用。
 ```bash
 git clone <本仓库>
-cd server
-npm install
-docker compose up -d --build
+cd qms-radio-firmware
+# 任选其一启动静态服务（无需 npm install）：
+npm start                       # 内置零依赖静态服务器 -> http://localhost:8080
+# 或： npx --yes serve public
+# 或： python3 -m http.server 8080   （在 public/ 目录下执行）
 ```
 用 Chrome / Edge 打开站点（Web Serial 需要 HTTPS 或 localhost）。
-> ECDSA P-256 签名私钥**有意不放入**本仓库。已发布二进制的令牌由托管服务 ba4qms.top 签发。
 
 ### 许可证
 MIT —— 见 [LICENSE](LICENSE)。
