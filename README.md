@@ -32,10 +32,23 @@ The **live monitor** in this project is genuinely useful — you can watch real-
 4. Configure your callsign / DMR ID and you are on the air.
 
 ### Hardware you need
-- An ESP32-S3 development board.
+- An **ESP32-S3 standard development board — it must be the N16R8 variant (16 MB Flash + 8 MB PSRAM)**. Boards without 8 MB PSRAM cannot run the voice codec.
 - A **UAC 1.0** Type-C headset (e.g. Google Pixel-type). Note: some AB17x-based headsets mute on PTT — not recommended.
 - Short the board's **OTG / USB** pads so it can act as a USB host for the headset.
 - 2.4 GHz Wi-Fi only.
+
+#### OLED display (recommended for self-hosting)
+The hosted site **https://ba4qms.top** has a live monitor page, but a self-hosted flasher has none — you can't watch RX/TX in the browser. A small OLED is the cheapest way to see status locally.
+- Only the **0.96-inch I2C OLED (SSD1306, I2C address 0x3C)** has been tested. Other sizes are not guaranteed.
+- The board's **IN-OUT pad must be shorted** to route the display signals.
+- Wiring (ESP32-S3 GPIO → OLED module):
+
+  | ESP32-S3 | OLED |
+  |----------|------|
+  | GPIO 13 (SDA) | SDA |
+  | GPIO 14 (SCL) | SCL |
+  | 3.3V | VCC |
+  | GND | GND |
 
 ### Self-hosting the flasher (optional)
 This repo is a **pure static site** — just serve the `public/` folder with any static file server. No backend, no database, no build step. The firmware binary is already bundled, so one-click flashing works out of the box.
@@ -75,10 +88,23 @@ MMDVM-S3 Terminal 把一块普通的 ESP32-S3 开发板变成一个紧凑的 DMR
 4. 配置呼号 / DMR ID 即可上线。
 
 ### 所需硬件
-- 一块 ESP32-S3 开发板。
+- 一块 **ESP32-S3 标准开发板，必须是 N16R8 规格（16MB Flash + 8MB PSRAM）**。内存不足（无 8MB PSRAM）将无法运行声码器。
 - 一副 **UAC 1.0** Type-C 耳机（如 Google Pixel 原装/兼容款）。注意：部分采用 AB17x 方案的耳机会在按 PTT 时被硬件静音，不推荐。
 - 短接开发板上的 **OTG / USB** 焊盘，使其可作为 USB 主机接耳机。
 - 仅支持 2.4GHz-WiFi。
+
+#### OLED 屏幕（自托管推荐）
+托管站点 **https://ba4qms.top** 带有实时监视页，但自建部署没有监视页，无法在浏览器里看 RX/TX。接一块小 OLED 是在本地查看状态最省事的办法。
+- 仅实测过 **0.96 寸 I2C OLED（SSD1306，I2C 地址 0x3C）**，其它尺寸不保证可用。
+- 需先**短接开发板上的 IN-OUT 焊盘**，才能把显示信号引出。
+- 接线（ESP32-S3 GPIO → OLED 模块）：
+
+  | ESP32-S3 | OLED |
+  |----------|------|
+  | GPIO 13（SDA） | SDA |
+  | GPIO 14（SCL） | SCL |
+  | 3.3V | VCC |
+  | GND | GND |
 
 ### 自建烧写工具（可选）
 本仓库是**纯静态站点**——只需用任意静态服务器托管 `public/` 目录即可，无需后端、无需数据库、无需构建。可烧写的固件（`public/firmware/combined.bin`）已随仓库附带，clone 后即可一键烧写，开箱即用。
