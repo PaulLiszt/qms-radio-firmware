@@ -136,6 +136,7 @@ button.primary { background: var(--accent); color: #fff; }
 .hero-actions { margin: 0; }
 .btn-github { display: inline-block; margin-top: 14px; padding: 10px 18px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-weight: 600; text-decoration: none; }
 .btn-github:hover { opacity: .9; }
+.full-cta { border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
 .feat, .steps { line-height: 1.9; color: #cdd6e8; }
 .feat li, .steps li { margin: 4px 0; }
 .flinks { display: flex; flex-wrap: wrap; gap: 10px; }

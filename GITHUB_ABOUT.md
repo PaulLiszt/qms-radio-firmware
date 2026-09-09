@@ -13,8 +13,8 @@ ESP32-S3 all-in-one MMDVM/DMR terminal with a zero-install browser Web Serial fl
 MMDVM-S3 Terminal turns a single ESP32-S3 board into a DMR hotspot / terminal.
 - Flash the firmware & set callsign/DMR ID in the browser over Web Serial (zero install).
 - Voice codec runs in software — no external dongle, no Raspberry Pi.
-- USB-headset audio (UAC 1.0), free device tokens (ECDSA P-256).
-Web source (MIT) here; firmware binary via Releases.
+- USB-headset audio (UAC 1.0).
+This repo = the browser flasher & config tool (MIT). Full platform (live monitor, account, network tokens) is hosted at ba4qms.top; firmware binary (combined.bin) is bundled in the repo.
 ```
 
 ## 3) Topics（标签，点 About 齿轮后逐条添加，提升检索权重）

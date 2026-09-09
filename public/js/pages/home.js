@@ -38,6 +38,12 @@ export async function renderHome(view) {
       <p class="hero-actions"><a class="btn-github" href="https://github.com/PaulLiszt/qms-radio-firmware" target="_blank" rel="noopener noreferrer">${t('home.repoLink')} ↗</a></p>
     </section>
 
+    <section class="card full-cta">
+      <h2>${t('home.fullTitle')}</h2>
+      <p class="sub">${t('home.fullBody')}</p>
+      <p class="hero-actions"><a class="btn-github" href="https://ba4qms.top" target="_blank" rel="noopener noreferrer">ba4qms.top ↗</a></p>
+    </section>
+
     <section class="card">
       <h2>${t('home.hwTitle')}</h2>
       <ul class="feat">
